@@ -220,7 +220,7 @@ function mostrarFormulario() {
     const mes = String(hoy.getMonth() + 1).padStart(2, '0');
     const dia = String(hoy.getDate()).padStart(2, '0');
     vencimientoInput.value = `${año}-${mes}-${dia}`;
-    
+     verificarFecha();
     // Actualizar hash en URL
     window.location.hash = '';
 }
@@ -386,72 +386,72 @@ function crearTarjetaTarea(tarea, estado) {
         e.stopPropagation();
         const id = parseInt(this.dataset.id);
         console.log('Botón eliminar clickeado - ID:', id);
-        eliminarTarea(id);
+        Área eliminatoria(id);
     });
     
-    return card;
+    retorno card;
 }
 
 // Función para determinar el estado de la tarea
-function determinarEstado(tarea) {
-    const ahora = new Date();
-    const vencimiento = new Date(tarea.vencimiento);
+función determinarEstado(tarea) {
+    const ahora = nuevo Fecha();
+    const vencimiento = nuevo Fecha(tarea.vencimiento);
     
-    if (tarea.cumplida) {
-        return 'cumplida';
-    } else if (ahora > vencimiento) {
-        return 'vencida';
+    si (tarea.cumplida) {
+        retorno 'cumplida';
+    } else si (ahora > vencimiento) {
+        retorno 'vencida';
     } else {
-        return 'pendiente';
+        retorno 'pendiente';
     }
 }
 
 // Función para marcar/desmarcar tarea como cumplida
-async function toggleCumplida(id, cumplida) {
-    console.log('Toggle cumplida - ID:', id, 'Cumplida:', cumplida);
+async función alternarCumplida(id, cumplida) {
+    consola.registro('Alternar cumplida - ID:', id, 'Cumplida:', cumplida);
     
-    try {
-        await db.toggleCumplida(id, cumplida);
-        console.log('Estado actualizado, recargando tareas...');
-        await cargarTareas();
-    } catch (error) {
-        console.error('Error al actualizar:', error);
-        alert('Error al actualizar la tarea');
+    intentar {
+        await db.alternarCumplida(id, cumplida);
+        consola.registro('Estado actualizado, recargando tareas...');
+        await CargarTareas();
+    } atrapar (error) {
+        consola.error('Error al actualizar:', error);
+        alertaa('Error al actualizar la tarea');
         // Recargar para mantener consistencia
-        await cargarTareas();
+        await CargarTareas();
     }
 }
 
 // Función para eliminar tarea (VERSIÓN ULTRA CORREGIDA)
-async function eliminarTarea(id) {
-    console.log('=== INICIANDO PROCESO DE ELIMINACIÓN ===');
-    console.log('ID a eliminar:', id);
-    console.log('Tipo de ID:', typeof id);
+async función Área eliminatoria(id) {
+    consola.registro('=== INICIO PROCESO DE ELIMINACIÓN ===');
+    consola.registro('ID a eliminatorio:', id);
+    consola.registro('Tipo de ID:', tipo de id);
     
-    if (!confirm('¿Estás seguro de eliminar esta tarea?')) {
-        console.log('Eliminación cancelada por el usuario');
-        return;
+    si (!confirmar('¿Está seguro de eliminar esta tarea?')) {
+        consola.registro('Eliminación cancelada por el usuario');
+        retorno;
     }
     
-    try {
-        console.log('Ejecutando db.deleteTarea...');
-        await db.deleteTarea(id);
-        console.log('Tarea eliminada de la base de datos');
+    intentar {
+        consola.registro('Ejecutando db.deleteTarea...');
+        await db.eliminar área(id);
+        consola.registro('Tarea eliminada de la base de datos');
         
-        console.log('Recargando lista de tareas...');
-        await cargarTareas();
+        consola.registro('Recargando lista de tareas...');
+        await CargarTareas();
         
-        console.log('=== PROCESO COMPLETADO EXITOSAMENTE ===');
-    } catch (error) {
-        console.error('=== ERROR EN EL PROCESO ===');
-        console.error('Error detallado:', error);
-        console.error('Mensaje:', error.message);
-        console.error('Stack:', error.stack);
-        alert('Error al eliminar la tarea: ' + error.message);
+        consola.registro('=== PROCESO COMPLETO EXITOSAMENTE ===');
+    } atrapar (error) {
+        consola.error('=== ERROR EN EL PROCESO ===');
+        consola.error('Error detallado:', error);
+        consola.error('Mensaje:', error.mensaje);
+        consola.error('Pila:', error.pila);
+        alertaa('Error al eliminar la tarea: ' + error.mensaje);
     }
 }
 
-// Exponer funciones globalmente para debugging
-window.eliminarTarea = eliminarTarea;
-window.db = db;
-window.cargarTareas = cargarTareas;
+// Exponer funciones globales para depuración
+ventana.Área eliminatoria = Área eliminatoria;
+ventana.db = db;
+ventana.CargarTareas = CargarTareas;
