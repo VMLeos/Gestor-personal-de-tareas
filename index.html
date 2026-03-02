@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas</title>
+    <link rel="stylesheet" href="assets/css/tareas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Tareas</h1>
+        
+        <div class="botones-principales">
+            <button id="btnNuevaTarea" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Nueva Tarea
+            </button>
+            <button id="btnVerTareas" class="btn btn-secondary">
+                <i class="fas fa-tasks"></i> Ver Tareas
+            </button>
+        </div>
+
+        <!-- Formulario de nueva tarea -->
+        <div id="formularioTarea" class="formulario-oculto">
+            <h2>Nueva Tarea</h2>
+            <form id="tareaForm">
+                <div class="form-group">
+                    <label for="tarea">Tarea:</label>
+                    <input type="text" id="tarea" name="tarea" required autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="vencimiento">Fecha de vencimiento:</label>
+                    <input type="date" id="vencimiento" name="vencimiento" required>
+                </div>
+
+                <div id="panelHora" class="form-group oculto">
+                    <label for="hora">Hora de vencimiento:</label>
+                    <input type="time" id="hora" name="hora">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-success">Guardar Tarea</button>
+                    <button type="button" id="btnCancelar" class="btn btn-danger">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Listado de tareas -->
+        <div id="listadoTareas" class="listado-oculto">
+            <h2>Mis Tareas</h2>
+            <div id="tareasContainer" class="tareas-grid">
+                <!-- Las tareas se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <script src="tareas.js"></script>
+</body>
+</html>
